@@ -1,0 +1,65 @@
+
+🗂️   Project: To-Do List API  
+
+Stack:   Node.js + Express + MongoDB (Mongoose) + JWT + bcrypt  
+
+✅   Day 1 – Setup + Models  
+
+  1. Setup  
+
+npm init , install:  express ,  mongoose ,  dotenv ,  nodemon ,  bcryptjs ,  jsonwebtoken 
+  Folder structure:
+
+
+  /todo-api
+  ├── /models
+  ├── /routes
+  ├── /controllers
+  ├── /middlewares
+  ├── server.js
+  ├── .env
+
+
+2. Models
+
+User  model:
+  email: { type: String, unique: true },
+  password: String
+  username
+
+Task model:
+
+  title: String,
+  description: String,
+  status: { type: String, enum: ['pending', 'in-progress', 'done'], default: 'pending' },
+  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+
+
+✅   Day 2 – Auth System  
+
+  Logic:  
+  Hash password using  bcrypt 
+  On login, issue JWT token
+  added controllers for login, register, generate access token, logout, refreshaccesstoken, change password
+
+
+Day -03
+✅ Core Task Controller Functions:
+createTask(req, res)
+→ Create a new task for the logged-in user.
+
+getAllTasks(req, res)
+→ Get all tasks created by the logged-in user.
+
+getTaskById(req, res)
+→ Fetch a single task by ID (must belong to the user).
+
+updateTask(req, res)
+→ Update task (title, description, status). Only if owned by the user.
+
+deleteTask(req, res)
+→ Delete task by ID. Only if owned by the user.
+
+✅ Day 4 – Middleware & Route Protection + Error Handling
+Goal: Secure your app, handle edge cases, and clean up the control flow.
+ added auth middleware, added routes for task and user, done server.js
